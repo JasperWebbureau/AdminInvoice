@@ -1,0 +1,293 @@
+.admin-invoice-create-form {
+  gap: var(--admin-space-lg);
+  max-width: 980px;
+}
+
+.admin-invoice-editor-header {
+  align-items: center;
+
+  .admin-status {
+    gap: var(--admin-space-xs);
+  }
+
+  .admin-status i {
+    font-size: 7px;
+  }
+}
+
+.admin-invoice-editor-header [data-admin-invoice-preview][aria-disabled="true"] {
+  opacity: .5;
+  cursor: not-allowed;
+}
+
+.admin-invoice-delete-draft {
+  color: var(--admin-color-danger);
+}
+
+.admin-invoice-editor-layout {
+  gap: var(--admin-space-md);
+  align-items: start;
+}
+
+.admin-invoice-lines-table-wrap {
+  overflow-x: auto;
+}
+
+.admin-invoice-lines-table {
+  width: 100%;
+  border-collapse: collapse;
+
+  th,
+  td {
+    padding: 10px 12px;
+    border-bottom: 1px solid var(--admin-color-border-soft);
+    text-align: left;
+    white-space: nowrap;
+  }
+
+  th {
+    color: var(--admin-color-text-muted);
+    font-size: 10px;
+    letter-spacing: .02em;
+    text-transform: uppercase;
+  }
+
+  td:first-child {
+    width: 100%;
+    min-width: 220px;
+    white-space: normal;
+  }
+}
+
+.admin-invoice-line-input {
+  width: 100%;
+  min-width: 76px;
+  min-height: 34px;
+  padding: 6px 8px;
+  border: 1px solid transparent;
+  border-radius: var(--admin-radius-control);
+  background: var(--admin-color-surface-muted);
+  color: var(--admin-color-text);
+}
+
+.admin-invoice-line-input:hover,
+.admin-invoice-line-input:focus {
+  border-color: var(--admin-color-border);
+  background: var(--admin-color-surface);
+  outline: none;
+}
+
+.admin-invoice-line-input--description {
+  min-width: 210px;
+}
+
+.admin-invoice-line-actions {
+  display: flex;
+  align-items: center;
+  justify-content: flex-end;
+  gap: var(--admin-space-xs);
+}
+
+.admin-invoice-line-actions form {
+  display: none;
+}
+
+.admin-invoice-line-remove {
+  display: inline-grid;
+  place-items: center;
+  width: 30px;
+  height: 30px;
+  padding: 0;
+  border: 0;
+  border-radius: var(--admin-radius-control);
+  background: var(--admin-color-danger-soft);
+  color: var(--admin-color-danger);
+  cursor: pointer;
+}
+
+form.admin-invoice-line-form {
+  align-items: end;
+  gap: var(--admin-space-sm);
+  padding: var(--admin-space-md);
+  background: var(--admin-color-surface-muted);
+}
+
+form.admin-invoice-line-form > .admin-field {
+  --cw: 2;
+  --cw-sm: 6;
+  --cw-xs: 12;
+}
+
+form.admin-invoice-line-form > .admin-invoice-line-description {
+  --cw: 4;
+  --cw-sm: 12;
+}
+
+form.admin-invoice-line-form > .button {
+  --cw: 12;
+}
+
+.admin-invoice-repeat-confirm {
+  display: flex;
+  align-items: flex-start;
+  gap: var(--admin-space-sm);
+
+  input {
+    flex: 0 0 auto;
+    margin: 2px 0 0;
+  }
+}
+
+.admin-invoice-line-form .button {
+  min-height: 38px;
+  white-space: nowrap;
+}
+
+.admin-invoice-totals {
+  display: grid;
+  gap: var(--admin-space-md);
+}
+
+.admin-invoice-totals > div {
+  display: flex;
+  justify-content: space-between;
+  gap: var(--admin-space-md);
+  color: var(--admin-color-text-muted);
+}
+
+.admin-invoice-totals strong {
+  color: var(--admin-color-text);
+  white-space: nowrap;
+}
+
+.admin-invoice-totals__grand {
+  margin-top: var(--admin-space-xs);
+  padding-top: var(--admin-space-md);
+  border-top: 1px solid var(--admin-color-border);
+  color: var(--admin-color-primary) !important;
+  font-size: 16px;
+}
+
+.admin-invoice-totals__grand strong {
+  color: var(--admin-color-primary);
+  font-size: 20px;
+}
+
+.admin-invoice-detail-list {
+  display: grid;
+  gap: var(--admin-space-md);
+}
+
+.admin-invoice-detail-list > div {
+  display: grid;
+  grid-template-columns: minmax(110px, .8fr) minmax(0, 1.2fr);
+  gap: var(--admin-space-md);
+  padding-bottom: var(--admin-space-sm);
+  border-bottom: 1px solid var(--admin-color-border-soft);
+}
+
+.admin-invoice-detail-list span {
+  color: var(--admin-color-text-muted);
+}
+
+.admin-invoice-detail-list strong {
+  color: var(--admin-color-text);
+  overflow-wrap: anywhere;
+}
+
+.admin-invoice-detail-notes {
+  line-height: 1.55;
+}
+
+.admin-credit-dialog {
+  width: min(560px, calc(100vw - (2 * var(--admin-space-lg))));
+  max-width: 100%;
+  padding: 0;
+  border: 0;
+  border-radius: var(--admin-radius-panel);
+  background: var(--admin-color-surface);
+  color: var(--admin-color-text);
+  box-shadow: 0 24px 70px rgba(17, 24, 39, .28);
+}
+
+.admin-credit-dialog::backdrop {
+  background: rgba(17, 24, 39, .55);
+  backdrop-filter: blur(2px);
+}
+
+.admin-credit-dialog > .admin-credit-form {
+  margin: 0;
+}
+
+.admin-credit-dialog__header,
+.admin-credit-dialog__actions {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: var(--admin-space-md);
+  padding: var(--admin-space-lg);
+}
+
+.admin-credit-dialog__header {
+  border-bottom: 1px solid var(--admin-color-border-soft);
+}
+
+.admin-credit-dialog__header h2,
+.admin-credit-dialog__header p {
+  margin: 0;
+}
+
+.admin-credit-dialog__close {
+  display: inline-grid;
+  flex: 0 0 auto;
+  place-items: center;
+  width: 36px;
+  height: 36px;
+  padding: 0;
+  border: 1px solid var(--admin-color-border-soft);
+  border-radius: 50%;
+  background: var(--admin-color-surface);
+  color: var(--admin-color-text-muted);
+  cursor: pointer;
+}
+
+.admin-credit-dialog__body {
+  display: grid;
+  gap: var(--admin-space-lg);
+  padding: var(--admin-space-lg);
+}
+
+.admin-credit-dialog__body p {
+  margin: 0;
+  color: var(--admin-color-text-muted);
+  line-height: 1.55;
+}
+
+.admin-credit-reason {
+  display: grid;
+  gap: var(--admin-space-xs);
+}
+
+.admin-credit-reason textarea {
+  width: 100%;
+  min-height: 110px;
+  padding: var(--admin-space-sm);
+  resize: vertical;
+  border: 1px solid var(--admin-color-border);
+  border-radius: var(--admin-radius-control);
+  background: var(--admin-color-surface);
+  color: var(--admin-color-text);
+  font: inherit;
+}
+
+.admin-credit-reason textarea:focus {
+  border-color: var(--admin-color-primary);
+  outline: 2px solid color-mix(in srgb, var(--admin-color-primary) 20%, transparent);
+  outline-offset: 1px;
+}
+
+.admin-credit-dialog__actions {
+  justify-content: flex-end;
+  border-top: 1px solid var(--admin-color-border-soft);
+  background: var(--admin-color-surface-muted);
+}
