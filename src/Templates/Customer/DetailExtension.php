@@ -15,8 +15,6 @@ $h = function ($value): string {
             <p>Documenten van <?=$h($customerName ?? '')?>. Een nieuw concept gebruikt de actuele klant- en factuuradresgegevens.</p>
         <?php } elseif (empty($isActive)) { ?>
             <p class="admin-field-help">Activeer deze klant voordat je een nieuwe factuur aanmaakt.</p>
-        <?php } elseif (empty($hasPrimaryBillingAddress)) { ?>
-            <p class="admin-field-help">Voeg eerst een primair factuuradres toe en sla de klant op.</p>
         <?php } ?>
 
         <?php
@@ -33,7 +31,7 @@ $h = function ($value): string {
     <div class="panel__body admin-panel__body">
         <p>Een schema bepaalt <strong>wanneer</strong> er wordt gefactureerd. De items eronder bepalen de vaste regels; een aangesloten project kan ook automatisch extra regels toevoegen. Alle regels binnen hetzelfde schema worden één conceptfactuur. Controleer dit met de proefrun. Er wordt niets automatisch verstuurd of betaald.</p>
         <?php if (empty($canCreateInvoice)) { ?>
-            <p class="admin-field-help">Deze klant moet actief zijn en een primair factuuradres hebben voordat je een schema kunt koppelen.</p>
+            <p class="admin-field-help">Deze klant moet actief zijn voordat je een schema kunt koppelen.</p>
         <?php } elseif (!empty($availablePlans)) { ?>
             <form class="admin-form" ajax="true" action="<?=$h($enrollAction ?? '')?>" method="post">
                 <input type="hidden" name="customer_public_id" value="<?=$h($customerPublicId ?? '')?>">

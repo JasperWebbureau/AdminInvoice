@@ -89,6 +89,12 @@ $createHtml = (string)ob_get_clean();
 adminInvoiceAssert(strpos($createHtml, 'value="customer-select-1"') !== false, 'Vooringevuld formulier moet de Customer-bron-id posten.');
 adminInvoiceAssert(strpos($createHtml, 'value="Klant B.V."') !== false, 'Vooringevuld formulier moet de klantnaam tonen.');
 adminInvoiceAssert(strpos($createHtml, 'value="Utrecht"') !== false, 'Vooringevuld formulier moet het factuuradres tonen.');
+foreach (['address[line_1]', 'address[postal_code]', 'address[city]', 'address[country_code]', 'customer[contact_name]'] as $optionalField) {
+    preg_match('/<input[^>]*name="' . preg_quote($optionalField, '/') . '"[^>]*>/', $createHtml, $input);
+    adminInvoiceAssert(isset($input[0]) && strpos($input[0], ' required') === false, 'Adres en contactpersoon mogen geen verplichte formuliervelden zijn.');
+}
+$optionalSelection = new InvoiceCustomerSelection('customer-optional', ['name' => 'Zonder adres of contact'], []);
+adminInvoiceAssert($optionalSelection->getBillingAddress() === [], 'Klantselectie moet een ontbrekend adres accepteren.');
 
 $missingPrefill = (new InvoiceCustomerPrefill())->resolve($provider, 'missing-customer');
 adminInvoiceAssert($missingPrefill['customer']['source_public_id'] === '', 'Ongeldige klantvoorinvulling mag geen bronkoppeling bewaren.');
@@ -129,7 +135,7 @@ $customerName = '<script>Klant</script>';
 $createInvoiceUrl = '/Flexgrid/AdminInvoice/create/customer-select-1';
 $canCreateInvoice = true;
 $isActive = true;
-$hasPrimaryBillingAddress = true;
+$hasPrimaryBillingAddress = false;
 $historyTable = [
     'id' => 'admin-customer-invoice-history',
     'label' => 'Recente documenten',

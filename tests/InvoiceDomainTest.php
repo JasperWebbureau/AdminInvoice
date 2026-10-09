@@ -58,6 +58,12 @@ adminInvoiceAssert(PartySnapshot::fromArray([
 $address = new AddressSnapshot('Markt 10', '1000 AA', 'Utrecht', 'nl', 'Bus 2');
 $addressRoundTrip = AddressSnapshot::fromArray($address->toArray());
 adminInvoiceAssert($addressRoundTrip->getCountryCode() === 'NL', 'AddressSnapshot moet de landcode normaliseren.');
+foreach ([new AddressSnapshot('', '', '', ''), new AddressSnapshot('Markt 10', '', '', 'nl')] as $optionalAddress) {
+    adminInvoiceAssert(AddressSnapshot::fromArray($optionalAddress->toArray())->toArray() === $optionalAddress->toArray(), 'Lege en gedeeltelijke factuuradressen moeten leesbaar blijven.');
+}
+adminInvoiceAssertThrows(InvalidArgumentException::class, function (): void {
+    new AddressSnapshot('', '', '', 'Nederland');
+}, 'Een ingevulde landcode moet nog steeds geldig zijn.');
 adminInvoiceAssertThrows(InvalidArgumentException::class, function () use ($party): void {
     $data = $party->toArray();
     $data['schema_version'] = 99;

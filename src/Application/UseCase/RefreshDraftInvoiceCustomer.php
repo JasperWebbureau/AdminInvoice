@@ -24,7 +24,7 @@ final class RefreshDraftInvoiceCustomer
             if($invoice===null){throw new InvoiceNotFoundException('Factuur niet gevonden.');}
             if($invoice->getCustomerSnapshot()->getSourcePublicId()!==$selection->getPublicId()){throw new \DomainException('De gekoppelde klant is gewijzigd. Vernieuw de factuurpagina.');}
             $party=$selection->getParty();$address=$selection->getBillingAddress();
-            $invoice->updateCustomerSnapshot(new PartySnapshot((string)$party['name'],(string)($party['contact_name']??''),(string)($party['email']??''),(string)($party['phone']??''),(string)($party['registration_number']??''),(string)($party['tax_number']??''),$selection->getPublicId()),new AddressSnapshot((string)$address['line_1'],(string)$address['postal_code'],(string)$address['city'],(string)$address['country_code'],(string)($address['line_2']??''),(string)($address['region']??'')));
+            $invoice->updateCustomerSnapshot(new PartySnapshot((string)$party['name'],(string)($party['contact_name']??''),(string)($party['email']??''),(string)($party['phone']??''),(string)($party['registration_number']??''),(string)($party['tax_number']??''),$selection->getPublicId()),new AddressSnapshot((string)($address['line_1']??''),(string)($address['postal_code']??''),(string)($address['city']??''),(string)($address['country_code']??''),(string)($address['line_2']??''),(string)($address['region']??'')));
             $this->invoices->updateDraft($invoice,$this->calculator->calculate($invoice),(int)$this->clock->get());
             return $invoice;
         });

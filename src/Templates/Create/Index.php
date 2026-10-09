@@ -36,12 +36,12 @@ $h = function ($value): string {
         <section class="panel admin-panel" style="--cw:6;--cw-sm:12;--cw-xs:12">
             <div class="panel__header admin-panel__header"><h3><i class="fas fa-location-dot"></i> <?=t('admin_invoice_billing_address', 'Factuuradres')?></h3></div>
             <grid class="panel__body admin-panel__body admin-form-grid fluid">
-                <label class="admin-field admin-field--wide"><span>Adres *</span><input name="address[line_1]" value="<?=$h($address['line_1'] ?? '')?>" required maxlength="255" autocomplete="street-address"></label>
+                <label class="admin-field admin-field--wide"><span>Adres</span><input name="address[line_1]" value="<?=$h($address['line_1'] ?? '')?>" maxlength="255" autocomplete="street-address"></label>
                 <label class="admin-field admin-field--wide"><span>Adresregel 2</span><input name="address[line_2]" value="<?=$h($address['line_2'] ?? '')?>" maxlength="255"></label>
-                <label class="admin-field"><span>Postcode *</span><input name="address[postal_code]" value="<?=$h($address['postal_code'] ?? '')?>" required maxlength="32" autocomplete="postal-code"></label>
-                <label class="admin-field"><span>Plaats *</span><input name="address[city]" value="<?=$h($address['city'] ?? '')?>" required maxlength="128" autocomplete="address-level2"></label>
+                <label class="admin-field"><span>Postcode</span><input name="address[postal_code]" value="<?=$h($address['postal_code'] ?? '')?>" maxlength="32" autocomplete="postal-code"></label>
+                <label class="admin-field"><span>Plaats</span><input name="address[city]" value="<?=$h($address['city'] ?? '')?>" maxlength="128" autocomplete="address-level2"></label>
                 <label class="admin-field"><span>Regio</span><input name="address[region]" value="<?=$h($address['region'] ?? '')?>" maxlength="128" autocomplete="address-level1"></label>
-                <label class="admin-field"><span>Landcode *</span><input name="address[country_code]" value="<?=$h($address['country_code'] ?? 'NL')?>" required maxlength="2" pattern="[A-Za-z]{2}" autocomplete="country"></label>
+                <label class="admin-field"><span>Landcode</span><input name="address[country_code]" value="<?=$h($address['country_code'] ?? 'NL')?>" maxlength="2" pattern="[A-Za-z]{2}" autocomplete="country"></label>
             </grid>
         </section>
 

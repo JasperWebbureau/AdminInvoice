@@ -20,7 +20,7 @@ final class InvoiceCustomerPrefill
 
         $selection = $provider->find($publicId);
         if ($selection === null) {
-            return $this->emptyResult('De klant is niet actief of heeft geen volledig primair factuuradres. Vul de gegevens handmatig in.');
+            return $this->emptyResult('De klant is niet actief of niet beschikbaar. Vul de gegevens handmatig in.');
         }
 
         $party = $selection->getParty();

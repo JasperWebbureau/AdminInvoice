@@ -33,12 +33,12 @@ $h = function ($value): string {
                 <label class="admin-field"><span>Telefoon</span><input name="customer[phone]" value="<?=$h($customer['phone'] ?? '')?>"></label>
                 <label class="admin-field"><span>KvK</span><input name="customer[registration_number]" value="<?=$h($customer['registration_number'] ?? '')?>"></label>
                 <label class="admin-field"><span>Btw-nummer</span><input name="customer[tax_number]" value="<?=$h($customer['tax_number'] ?? '')?>"></label>
-                <label class="admin-field admin-field--wide"><span>Adres *</span><input name="address[line_1]" value="<?=$h($address['line_1'] ?? '')?>" required></label>
+                <label class="admin-field admin-field--wide"><span>Adres</span><input name="address[line_1]" value="<?=$h($address['line_1'] ?? '')?>"></label>
                 <label class="admin-field admin-field--wide"><span>Adresregel 2</span><input name="address[line_2]" value="<?=$h($address['line_2'] ?? '')?>"></label>
-                <label class="admin-field"><span>Postcode *</span><input name="address[postal_code]" value="<?=$h($address['postal_code'] ?? '')?>" required></label>
-                <label class="admin-field"><span>Plaats *</span><input name="address[city]" value="<?=$h($address['city'] ?? '')?>" required></label>
+                <label class="admin-field"><span>Postcode</span><input name="address[postal_code]" value="<?=$h($address['postal_code'] ?? '')?>"></label>
+                <label class="admin-field"><span>Plaats</span><input name="address[city]" value="<?=$h($address['city'] ?? '')?>"></label>
                 <label class="admin-field"><span>Regio</span><input name="address[region]" value="<?=$h($address['region'] ?? '')?>"></label>
-                <label class="admin-field"><span>Landcode *</span><input name="address[country_code]" value="<?=$h($address['country_code'] ?? '')?>" maxlength="2" required></label>
+                <label class="admin-field"><span>Landcode</span><input name="address[country_code]" value="<?=$h($address['country_code'] ?? '')?>" maxlength="2"></label>
                 <?php if (($customerEditUrl ?? '') !== '') { ?><div style="--cw:12"><button class="button button-secondary button-small" type="button" ajax="true" action="<?=$h($actions['refresh_customer'] ?? '')?>" public_id="<?=$h($publicId)?>" alert="Klantgegevens uit de klantkaart overnemen? Niet-opgeslagen wijzigingen in dit formulier gaan verloren." use-waiting-icon><i class="fas fa-sync-alt"></i> Klantgegevens vernieuwen</button></div><?php } ?>
             </grid>
         </section>

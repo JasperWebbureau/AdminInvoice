@@ -76,9 +76,8 @@ final class CustomerDetailExtension implements CustomerDetailExtensionInterface
                 'customerName' => $context->getDisplayName(),
                 'createInvoiceUrl' => $moduleBaseUrl . 'create/'
                     . rawurlencode($context->getPublicId()),
-                'canCreateInvoice' => $context->isActive() && $context->hasPrimaryBillingAddress(),
+                'canCreateInvoice' => $context->isActive(),
                 'isActive' => $context->isActive(),
-                'hasPrimaryBillingAddress' => $context->hasPrimaryBillingAddress(),
                 'historyTable' => $historyTable,
                 'customerPublicId' => $context->getPublicId(),
                 'availablePlans' => $availablePlans,

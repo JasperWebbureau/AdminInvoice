@@ -259,4 +259,11 @@ adminInvoiceAssertThrows(DomainException::class,function()use($refreshCustomer):
 $refreshInvoice->addLine(new \Flexgrid\Modules\AdminInvoice\Domain\Model\InvoiceLine('refresh-line','Werk',\Flexgrid\Modules\AdminInvoice\Domain\ValueObject\Quantity::fromDecimal('1'),'stuk',new \Flexgrid\Modules\AdminCore\ValueObject\Money(1000,new Currency('EUR')),new \Flexgrid\Modules\AdminCore\ValueObject\TaxRate(2100),new \Flexgrid\Modules\AdminInvoice\Domain\ValueObject\TaxCategory('standard'),10));
 $refreshInvoice->finalize('FAC-REFRESH',1,1770001234,$calculator->calculate($refreshInvoice));
 adminInvoiceAssertThrows(DomainException::class,function()use($refreshCustomer,$selection):void{$refreshCustomer->execute('refresh-invoice',$selection);},'Definitieve factuur mag geen nieuwe klantsnapshot krijgen.');
+$optionalDraft = new Invoice('optional-draft', $tenant, new Currency('EUR'), new PartySnapshot('Klant', 'Contact'), new AddressSnapshot('Straat 1', '1000 AA', 'Utrecht', 'NL'), new CalendarDate('2026-09-18'), new CalendarDate('2026-10-18'));
+$optionalRepository = new EditorInvoiceRepository($optionalDraft);
+(new UpdateDraftInvoice($context, $transactions, $optionalRepository, $calculator, $clock))->execute(new UpdateDraftInvoiceCommand('optional-draft', '2026-09-18', '2026-10-18', ['name' => 'Klant', 'source_public_id' => 'customer-optional'], []));
+adminInvoiceAssert($optionalDraft->getBillingAddressSnapshot()->toArray()['country_code'] === '' && $optionalDraft->getCustomerSnapshot()->toArray()['contact_name'] === '', 'Conceptupdate moet adres en contactpersoon kunnen wissen.');
+(new RefreshDraftInvoiceCustomer($context, $transactions, $optionalRepository, $calculator, $clock))->execute('optional-draft', new \Flexgrid\Modules\AdminInvoice\Application\ReadModel\InvoiceCustomerSelection('customer-optional', ['name' => 'Nieuw'], []));
+adminInvoiceAssert($optionalDraft->getCustomerSnapshot()->getName() === 'Nieuw', 'Klantverversing moet zonder adres of contactpersoon werken.');
+
 echo "AdminInvoice draft editor tests passed.\n";

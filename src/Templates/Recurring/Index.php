@@ -50,7 +50,7 @@ $editing = is_array($current ?? null);
             <div class="panel__header admin-panel__header"><h3>Klant aan dit schema koppelen</h3></div>
             <div class="panel__body admin-panel__body">
                 <?php if ((int)$current['active'] !== 1) { ?><p>Dit schema is gepauzeerd. Activeer het schema hierboven en sla het op voordat je klanten koppelt.</p><?php } else { ?>
-                <p>Zoek een actieve klant met een volledig factuuradres. Na het koppelen open je de klant met het potloodicoon om de factuuritems voor dit schema toe te voegen.</p>
+                <p>Zoek een actieve klant. Factuuradres en contactpersoon zijn optioneel. Na het koppelen open je de klant met het potloodicoon om de factuuritems voor dit schema toe te voegen.</p>
                 <form class="admin-form admin-invoice-customer-search" data-admin-invoice-customer-search ajax="true" action="<?=$h($customerSearchAction ?? '')?>" method="post">
                     <label class="admin-data-search"><span class="admin-visually-hidden">Zoek een klant</span><i class="fas fa-search" aria-hidden="true"></i><input type="search" name="q" placeholder="Zoek op klant, contact, e-mail, adres of nummer…" autocomplete="off"></label>
                     <button class="button button-secondary" type="submit">Zoeken</button>

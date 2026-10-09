@@ -33,10 +33,7 @@ final class AddressSnapshot
         $postalCode = trim($postalCode);
         $city = trim($city);
         $countryCode = strtoupper(trim($countryCode));
-        if ($line1 === '' || $postalCode === '' || $city === '') {
-            throw new \InvalidArgumentException('Adresregel, postcode en plaats zijn verplicht.');
-        }
-        if (preg_match('/^[A-Z]{2}$/D', $countryCode) !== 1) {
+        if ($countryCode !== '' && preg_match('/^[A-Z]{2}$/D', $countryCode) !== 1) {
             throw new \InvalidArgumentException('Landcode moet uit twee letters bestaan.');
         }
 

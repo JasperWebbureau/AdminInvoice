@@ -96,10 +96,10 @@ final class UpdateDraftInvoice
     private function address(array $data): AddressSnapshot
     {
         return new AddressSnapshot(
-            $this->text($data, 'line_1', true),
-            $this->text($data, 'postal_code', true),
-            $this->text($data, 'city', true),
-            $this->text($data, 'country_code', true),
+            $this->text($data, 'line_1'),
+            $this->text($data, 'postal_code'),
+            $this->text($data, 'city'),
+            $this->text($data, 'country_code'),
             $this->text($data, 'line_2'),
             $this->text($data, 'region')
         );

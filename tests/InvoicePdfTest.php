@@ -179,6 +179,9 @@ adminInvoiceAssertThrows(DomainException::class, function () use ($generator, $i
     $generator->preview($invoice);
 }, 'De conceptpreview mag geen definitieve factuur verwerken.');
 
+$optionalPdfInvoice = new Invoice('optional-pdf', new TenantId('pdf-tenant'), Currency::euro(), new PartySnapshot('Klant zonder adres of contact'), new AddressSnapshot('', '', '', ''), new CalendarDate('2026-09-18'), new CalendarDate('2026-10-18'));
+adminInvoiceAssert(strncmp($generator->preview($optionalPdfInvoice)->getContent(), '%PDF-', 5) === 0, 'PDF moet zonder klantadres en contactpersoon kunnen worden gemaakt.');
+
 extract($draftViewModel, EXTR_OVERWRITE);
 ob_start();
 include $moduleTemplates . '/default.php';

@@ -185,7 +185,7 @@ final class RecurringInvoices
             throw new \InvalidArgumentException('Kies een actief factuuritem.');
         }
         if ($this->customers === null || ($customer = $this->customers->find($customerPublicId)) === null) {
-            throw new \InvalidArgumentException('Deze klant is niet actief of heeft geen volledig factuuradres.');
+            throw new \InvalidArgumentException('Deze klant is niet actief of niet beschikbaar.');
         }
         $plan = $this->find($planPublicId);
         $currentItems = $this->activeMemberItems($planPublicId, $customerPublicId);
@@ -246,7 +246,7 @@ final class RecurringInvoices
                 throw new \InvalidArgumentException('Deze keuzegroep heeft geen actieve varianten.');
             }
             if ($this->customers === null || ($customer = $this->customers->find($customerPublicId)) === null) {
-                throw new \InvalidArgumentException('Deze klant is niet actief of heeft geen volledig factuuradres.');
+                throw new \InvalidArgumentException('Deze klant is niet actief of niet beschikbaar.');
             }
             $plan = $this->find($planPublicId);
             $otherActiveItems = $this->activeMemberItems($planPublicId, $customerPublicId);
@@ -297,7 +297,7 @@ final class RecurringInvoices
             throw new \InvalidArgumentException('Activeer eerst het herhaalschema.');
         }
         if ($this->customers === null || ($customer = $this->customers->find($customerPublicId)) === null) {
-            throw new \InvalidArgumentException('Deze klant is niet actief of heeft geen volledig factuuradres.');
+            throw new \InvalidArgumentException('Deze klant is niet actief of niet beschikbaar.');
         }
         $defaultItemId = (string)$plan['catalog_item_public_id'];
         if ($defaultItemId !== '') {
@@ -390,7 +390,7 @@ final class RecurringInvoices
                 throw new \InvalidArgumentException('Activeer eerst het herhaalschema.');
             }
             if ($this->customers === null || ($customer = $this->customers->find($customerPublicId)) === null) {
-                throw new \InvalidArgumentException('Deze klant is niet actief of heeft geen volledig factuuradres.');
+                throw new \InvalidArgumentException('Deze klant is niet actief of niet beschikbaar.');
             }
             $activeItems = $this->activeMemberItems($planPublicId, $customerPublicId);
             foreach ($activeItems as $assignedItem) {
@@ -501,7 +501,7 @@ final class RecurringInvoices
         }
         $customer = $customerId !== '' ? $this->customers->find($customerId) : null;
         if ($customerId !== '' && $customer === null) {
-            throw new \InvalidArgumentException('Kies een actieve klant met een volledig factuuradres.');
+            throw new \InvalidArgumentException('Kies een actieve klant.');
         }
         $item = $itemId !== '' ? $this->catalog->find($itemId) : null;
         if (($customerId !== '' || $itemId !== '') && ($item === null || (int)$item['active'] !== 1)) {
@@ -874,7 +874,7 @@ final class RecurringInvoices
         $customer = $this->customers->find($memberCustomerId !== ''
             ? $memberCustomerId : (string)$plan['customer_public_id']);
         if ($customer === null) {
-            throw new \InvalidArgumentException('De klant is niet meer actief of het factuuradres ontbreekt.');
+            throw new \InvalidArgumentException('De klant is niet meer actief of niet beschikbaar.');
         }
         $issueDate = (string)$plan['next_issue_date'];
         $assignedItems = $memberCustomerId !== ''

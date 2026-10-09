@@ -6,7 +6,7 @@ $h = function ($value): string {
 <?php if (($query ?? '') === '') { ?>
     <p class="admin-invoice-customer-results__hint">Vul minimaal twee tekens in.</p>
 <?php } elseif (($selections ?? []) === []) { ?>
-    <p class="admin-invoice-customer-results__hint">Geen actieve klanten met een volledig factuuradres gevonden.</p>
+    <p class="admin-invoice-customer-results__hint">Geen actieve klanten gevonden.</p>
 <?php } else { ?>
     <div class="admin-invoice-customer-result-list">
         <?php foreach ($selections as $selection) { ?>

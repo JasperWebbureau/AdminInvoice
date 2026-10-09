@@ -39,8 +39,10 @@ final class CatalogTestCustomers implements InvoiceCustomerProviderInterface
         return $this->available && $publicId !== $this->blockedId
             && in_array($publicId, ['customer-1', 'customer-2'], true)
             ? new InvoiceCustomerSelection($publicId, ['name' => 'Voorbeeld klant ' . $publicId], [
-                'line_1' => 'Teststraat 1', 'postal_code' => '1000 AA',
-                'city' => 'Amsterdam', 'country_code' => 'NL',
+                'line_1' => $publicId === 'customer-2' ? '' : 'Teststraat 1',
+                'postal_code' => $publicId === 'customer-2' ? '' : '1000 AA',
+                'city' => $publicId === 'customer-2' ? '' : 'Amsterdam',
+                'country_code' => $publicId === 'customer-2' ? '' : 'NL',
             ]) : null;
     }
 }

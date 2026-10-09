@@ -113,10 +113,10 @@ final class CreateInvoice implements InvoiceDraftCreatorInterface
                 $this->text($party, 'source_public_id')
             ),
             new AddressSnapshot(
-                $this->text($address, 'line_1', true),
-                $this->text($address, 'postal_code', true),
-                $this->text($address, 'city', true),
-                $this->text($address, 'country_code', true),
+                $this->text($address, 'line_1'),
+                $this->text($address, 'postal_code'),
+                $this->text($address, 'city'),
+                $this->text($address, 'country_code'),
                 $this->text($address, 'line_2'),
                 $this->text($address, 'region')
             ),

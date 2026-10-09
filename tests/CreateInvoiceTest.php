@@ -216,4 +216,13 @@ adminInvoiceAssertThrows(RuntimeException::class, function () use ($failingUseCa
 }, 'Persistencefout moet uit CreateInvoice terugkomen.');
 adminInvoiceAssert($failingTransactions->trace === ['begin', 'rollback'], 'Persistencefout moet de use-case terugrollen.');
 
+$optionalInvoice = $useCase->execute(new CreateInvoiceCommand(
+    'EUR', '2026-09-18', '2026-10-18', ['name' => 'Klant zonder adres of contact'], [],
+    [['description' => 'Dienst', 'quantity' => '1', 'unit' => 'stuk', 'unit_price' => '10.00', 'tax_rate' => '21', 'tax_category' => 'standard']]
+));
+adminInvoiceAssert($optionalInvoice->getCustomerSnapshot()->toArray()['contact_name'] === '', 'Factuur moet zonder contactpersoon worden aangemaakt.');
+adminInvoiceAssert($optionalInvoice->getBillingAddressSnapshot()->toArray()['line_1'] === '', 'Factuur moet zonder adres worden opgeslagen.');
+$optionalInvoice->finalize('OPTIONAL-1', 1, 1234567890, (new InvoiceCalculator())->calculate($optionalInvoice));
+adminInvoiceAssert($optionalInvoice->getInvoiceNumber() === 'OPTIONAL-1', 'Factuur zonder adres en contactpersoon moet definitief kunnen worden gemaakt.');
+
 echo "AdminInvoice CreateInvoice tests passed.\n";

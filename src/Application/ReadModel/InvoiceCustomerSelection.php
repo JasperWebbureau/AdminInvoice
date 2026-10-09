@@ -21,11 +21,6 @@ final class InvoiceCustomerSelection
                 throw new \InvalidArgumentException('Klantselectie mist verplichte klantgegevens.');
             }
         }
-        foreach (['line_1', 'postal_code', 'city', 'country_code'] as $required) {
-            if (!isset($billingAddress[$required]) || trim((string)$billingAddress[$required]) === '') {
-                throw new \InvalidArgumentException('Klantselectie mist een volledig factuuradres.');
-            }
-        }
         $this->publicId = $publicId;
         $this->party = $party;
         $this->billingAddress = $billingAddress;

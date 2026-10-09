@@ -85,7 +85,7 @@ De controller leidt de tenant bewust niet af uit hostname, database of ingelogde
 
 ## Optionele Customer-integratie
 
-AdminInvoice ontdekt conventiegebaseerd hooguit één `CustomerSelectionProvider`. De provider levert uitsluitend scalars voor de publieke bron-id, `PartySnapshot` en `AddressSnapshot`; Invoice bewaart zijn eigen versioned snapshots en krijgt geen foreign key of harde code-afhankelijkheid op Customer. Alleen actieve klanten met een volledig primair factuuradres worden aangeboden. Handmatige invoer blijft beschikbaar wanneer de provider ontbreekt of de koppeling wordt gewist. Alleen de expliciete `Integration/Customer`-map implementeert het publieke klantdetailcontract; de Invoice-controller en kern importeren geen concrete Customer-code.
+AdminInvoice ontdekt conventiegebaseerd hooguit één `CustomerSelectionProvider`. De provider levert uitsluitend scalars voor de publieke bron-id, `PartySnapshot` en `AddressSnapshot`; Invoice bewaart zijn eigen versioned snapshots en krijgt geen foreign key of harde code-afhankelijkheid op Customer. Alle actieve klanten worden aangeboden; factuuradres en contactpersoon zijn optioneel. Handmatige invoer blijft beschikbaar wanneer de provider ontbreekt of de koppeling wordt gewist. Alleen de expliciete `Integration/Customer`-map implementeert het publieke klantdetailcontract; de Invoice-controller en kern importeren geen concrete Customer-code.
 
 Een herhaalschema vereist een beschikbare klantprovider. De Invoice-kern en handmatige factuuraanmaak blijven zonder Customer bruikbaar. De geplande dagtaak is een application service; de hostinstallatie bepaalt hoe en wanneer die dagelijks wordt aangeroepen.
 
